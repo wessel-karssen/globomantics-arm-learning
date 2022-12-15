@@ -4,6 +4,9 @@ name: armTemplateDeployment
 
 # Controls when the workflow will run
 on:
+  push:
+    branches:
+      - "main"
   # Triggers the workflow on push or pull request events but only for the "main" branch
 
 
@@ -27,6 +30,13 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Resource Group rg-githubactions with AZ CLI
+        uses: Azure/cli@v1
+        with: 
+          inlinescript: |
+            az deployment sub create --location "West Europe" --template-file ./arm-templates/resourcegroup.json
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
