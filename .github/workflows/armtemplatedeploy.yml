@@ -15,18 +15,84 @@ on:
   workflow_dispatch:
 
 env:
-  resource_group_name: "rg-githubactions"
-  location: West Europe
   subscriptionID: 4ce69478-57ab-4f86-9a6d-4865ded3c14d
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  ArmDeploy:
+  ArmDeployStaging:
+    name: Deploy to Staging
+
+
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      resource_group_name: "rg-stg-githubactions"
+      location: West Europe
+    environment:
+      name: staging
 
     # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Login to Azure
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Resource Group ${{ env.resource_group_name }}
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionID: ${{ env.subscriptionID }}
+          region: "${{ env.location }}"
+          template: ./arm-templates/resourcegroup.json
+          deploymentName: ${{ env.resource_group_name }}
+
+      - name: Deploy Storage Account
+        uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource_group_name }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/storageaccount.json
+          parameters: 
+            ./arm-templates/storageaccount.parameters.json
+          deploymentMode: incremental
+
+      - name: Deploy Virutal machine
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource_group_name }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/virtualmachine.json
+          parameters: 
+            adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
+            location="${{ env.location }}"
+          deploymentMode: incremental
+
+# T-----------NEW JOB------------------------------------------------------------------------------------
+
+  ArmDeployStaging:
+    name: Deploy to Production
+
+
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      resource_group_name: "rg-prod-githubactions"
+      location: West Europe
+    environment:
+      name: production
+
+
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    needs: armDeployStaging
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
