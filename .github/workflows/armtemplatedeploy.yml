@@ -49,6 +49,8 @@ jobs:
           subscriptionID: ${{ env.subscriptionID }}
           region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
+          parameters:
+            resourceGroupName=${{ env.resourceGroupName }}
           deploymentName: ${{ env.resourceGroupName }}
 
       - name: Deploy Storage Account
