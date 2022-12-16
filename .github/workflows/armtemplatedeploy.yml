@@ -50,8 +50,4 @@ jobs:
           template: ./arm-templates/storageaccount.json
           parameters: 
             ./arm-templates/storageaccount.parameters.json
-            storageAccountName=globoastg002
-            location="Australia East"
           deploymentMode: incremental
-
-      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri}}
