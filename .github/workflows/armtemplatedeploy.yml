@@ -125,6 +125,7 @@ jobs:
           template: ./arm-templates/storageaccount.json
           parameters: 
             ./arm-templates/storageaccount.parameters.json
+            storageAccountName=${{ env.resource_group_name }}
           deploymentMode: incremental
 
       - name: Deploy Virutal machine
