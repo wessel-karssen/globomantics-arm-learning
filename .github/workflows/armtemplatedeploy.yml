@@ -77,7 +77,7 @@ jobs:
 
 # T-----------NEW JOB------------------------------------------------------------------------------------
 
-  ArmDeployStaging:
+  ArmDeployProduction:
     name: Deploy to Production
 
 
