@@ -58,7 +58,7 @@ jobs:
         id: storageAccountDeploy
         with:
           scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
+          resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
           template: ./arm-templates/storageaccount.json
           parameters: 
@@ -69,7 +69,7 @@ jobs:
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
+          resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
           template: ./arm-templates/virtualmachine.json
           parameters: 
