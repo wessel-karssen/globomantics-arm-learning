@@ -27,7 +27,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      resource_group_name: "rg-stg-githubactions"
+      resourceGroupName: "rg-stg-githubactions"
       location: West Europe
     environment:
       name: staging
@@ -42,14 +42,14 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Resource Group ${{ env.resource_group_name }}
+      - name: Deploy Resource Group ${{ env.resourceGroupName }}
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
           subscriptionID: ${{ env.subscriptionID }}
           region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
-          deploymentName: ${{ env.resource_group_name }}
+          deploymentName: ${{ env.resourceGroupName }}
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
