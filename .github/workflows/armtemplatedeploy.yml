@@ -51,3 +51,14 @@ jobs:
           parameters: 
             ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
+
+      - name: Deploy Virutal machine
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: "rg-githubactions"
+          subscriptionID: 4ce69478-57ab-4f86-9a6d-4865ded3c14d
+          template: ./arm-templates/virutalmachine.json
+          parameters: 
+            adminPassword="My$ecureP@ssword!"
+          deploymentMode: incremental
