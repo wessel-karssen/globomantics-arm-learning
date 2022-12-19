@@ -13,10 +13,15 @@
             "metadata": {
                 "description": "Enter the location name"
             }
-        }
+        },
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+        "vnetId": "[parameters('virtualNetworkId')]",
+        "vnetName": "[last(split(variables('vnetId'), '/'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+    },
     "resources": [
         {
             "name": "[parameters('name')]",
@@ -74,11 +79,8 @@
             "name": "ubuntuVM1-NetworkInterface",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-11-01",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', 'ubuntuVM1-PublicIP')]",
-                "[resourceId('Microsoft.Network/virtualNetworks', 'wessel-test-vnet')]"
-            ],
+            "location": "[parameters('location')]]",
+            "dependsOn": [],
             "tags": {
                 "displayName": "ubuntuVM1-NetworkInterface"
             },
@@ -89,10 +91,10 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'ubuntuVM1-PublicIP')]"
+                                "id": "('Microsoft.Network/publicIPAddresses', 'ubuntuVM1-PublicIP')"
                             },
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'wessel-test-vnet', 'srv-snet')]"
+                                "id": "('Microsoft.Network/virtualNetworks/subnets', 'wessel-test-vnet', 'srv-snet')"
                             }
                         }
                     }
