@@ -26,6 +26,12 @@
                 "description": "Enter the subnet-2 name"
             }
         },
+          "subnet-3": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the subnet-3 name"
+            }
+        },
         "location": {
             "type": "string",
             "metadata": {
