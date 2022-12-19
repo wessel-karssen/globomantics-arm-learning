@@ -71,7 +71,7 @@
             "value": "wktest"
         },
         "adminPassword": {
-            "value": ${{ secrets.UBUNTU_ADMIN_PASSWORD }}
+            "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
         }
     }
 }
