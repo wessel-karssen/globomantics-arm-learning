@@ -63,6 +63,7 @@ jobs:
           parameters: 
             ./arm-templates/wk-test-ngnix/node-1.parameters.json
             location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
           deploymentMode: Complete
 
 # ------------NEW JOB------------------------------------------------------------------------------------
