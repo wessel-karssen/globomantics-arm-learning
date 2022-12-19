@@ -58,9 +58,6 @@
         },
         "adminPassword": {
             "type": "secureString"
-        },
-        "dns": {
-            "type": "string"
         }
     },
     "variables": {
@@ -94,8 +91,7 @@
                                     "deleteOption": "[parameters('pipDeleteOption')]"
                                 }
                             },
-                               "dnsSettings": {
-                                    "dnsServers": "[parameters('dns')]"
+                            
                         }
                     }
                 ],
