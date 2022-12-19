@@ -52,18 +52,6 @@ jobs:
           parameters:
             resourceGroupName=${{ env.resourceGroupName }}
           deploymentName: ${{ env.resourceGroupName }}
-      
-      - name: Deploy Virtual Network
-        uses: Azure/arm-deploy@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resourceGroupName }}
-          subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/vnet/vnet.json
-          parameters: 
-            ./arm-templates/vnet/vnet.parameters.json
-            location="${{ env.location }}"
-          deploymentMode: Complete
 
       - name: Deploy Virtual Machine
         uses: Azure/arm-deploy@v1
@@ -77,6 +65,15 @@ jobs:
             location="${{ env.location }}"
           deploymentMode: Complete
 
+ # Deploy Bicep file
+     - name: deploy
+       uses: azure/arm-deploy@v1
+        with:
+         subscriptionID: ${{ env.subscriptionID }}
+         resourceGroupName: ${{ env.resourceGroupName }}
+         template: ./bicep/wk-test-strg01/main.bicep
+         parameters: 
+         failOnStdErr: false
 # ------------NEW JOB------------------------------------------------------------------------------------
 
   ArmDeployProduction:
@@ -114,28 +111,15 @@ jobs:
           parameters:
             resourceGroupName=${{ env.resource_group_name }}
           deploymentName: ${{ env.resource_group_name }}
-
-      - name: Deploy Storage Account
-        uses: Azure/arm-deploy@v1
-        id: storageAccountDeploy
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/storageaccount.json
-          parameters: 
-            ./arm-templates/storageaccount.parameters.json
-            storageAccountName=globalstg002
-          deploymentMode: incremental
-
-      - name: Deploy Virutal machine
+  
+      - name: Deploy Virtual Network
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
+          resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/virtualmachine.json
+          template: ./arm-templates/vnet/vnet.json
           parameters: 
-            adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
+            ./arm-templates/vnet/vnet.parameters.json
             location="${{ env.location }}"
-          deploymentMode: incremental
+          deploymentMode: Complete
