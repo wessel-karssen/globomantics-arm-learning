@@ -60,7 +60,7 @@
                     {
                         "name": "[parameters('subnet-2')]",
                         "properties": {
-                            "addressPrefix": "10.0.1.0/24"
+                            "addressPrefix": "10.57.1.0/24"
                         }
                     }
                 ]
