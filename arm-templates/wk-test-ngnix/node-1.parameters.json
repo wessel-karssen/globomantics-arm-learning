@@ -72,9 +72,7 @@
         },
         "adminPassword": {
             "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
-        },
-        "dns": {
-            "value": "8.8.8.8"
         }
+       
     }
 }
