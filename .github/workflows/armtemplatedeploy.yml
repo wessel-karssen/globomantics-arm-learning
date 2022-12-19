@@ -77,7 +77,7 @@ jobs:
             location="${{ env.location }}"
           deploymentMode: incremental
 
-# T-----------NEW JOB------------------------------------------------------------------------------------
+# ------------NEW JOB------------------------------------------------------------------------------------
 
   ArmDeployProduction:
     name: Deploy to Production
