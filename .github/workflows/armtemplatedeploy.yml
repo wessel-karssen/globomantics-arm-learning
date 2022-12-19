@@ -53,27 +53,17 @@ jobs:
             resourceGroupName=${{ env.resourceGroupName }}
           deploymentName: ${{ env.resourceGroupName }}
 
-      - name: Deploy Virtual Machine
+      - name: Deploy Bicep 
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/wk-test-ngnix/node-1.json
-          parameters: 
-            ./arm-templates/wk-test-ngnix/node-1.parameters.json
-            location="${{ env.location }}"
-          deploymentMode: Complete
-
- # Deploy Bicep file
-     -  name: deploy Bicep 
-        uses: azure/arm-deploy@v1
-        with:
-          subscriptionID: ${{ env.subscriptionID }}
-          resourceGroupName: ${{ env.resourceGroupName }}
           template: ./bicep/wk-test-strg01/main.bicep
           parameters: 
+            location="${{ env.location }}"
           failOnStdErr: false
+
 # ------------NEW JOB------------------------------------------------------------------------------------
 
   ArmDeployProduction:
