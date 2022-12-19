@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "value": "westeurope"
+            "value": "west europe"
         },
         "networkInterfaceName": {
-            "value": "wk-test-ngnix-node-1845"
+            "value": "wk-test-ngnix-node-1-VMNic"
         },
         "networkSecurityGroupName": {
-            "value": "wk-test-ngnix-node-1-nsg"
+            "value": "wk-test-ngnix-node-1-NSG"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -71,7 +71,7 @@
             "value": "wktest"
         },
         "adminPassword": {
-            "value": null
+            "value": ${{ secrets.UBUNTU_ADMIN_PASSWORD }}
         }
     }
 }
