@@ -63,7 +63,7 @@ jobs:
           parameters: 
             ./arm-templates/vnet/vnet.parameters.json
             location="${{ env.location }}"
-          deploymentMode: incremental
+          deploymentMode: Complete
 
 # ------------NEW JOB------------------------------------------------------------------------------------
 
