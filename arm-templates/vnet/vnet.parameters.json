@@ -14,6 +14,9 @@
         "subnet-2": {
             "value": "srv-snet" 
         },
+        "subnet-3": {
+            "value": "mysql-snet" 
+        },
         "location": {
             "value": "North Europe" 
         }

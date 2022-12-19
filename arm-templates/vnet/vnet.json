@@ -47,7 +47,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "10.119.0.0/23"
+                        "10.119.0.0/22"
                     ]
                 },
                 "subnets": [
@@ -61,6 +61,12 @@
                         "name": "[parameters('subnet-2')]",
                         "properties": {
                             "addressPrefix": "10.119.1.0/24"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet-3')]",
+                        "properties": {
+                            "addressPrefix": "10.119.2.0/24"
                         }
                     }
                 ]
