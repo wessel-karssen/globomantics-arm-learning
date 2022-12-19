@@ -66,14 +66,14 @@ jobs:
           deploymentMode: Complete
 
  # Deploy Bicep file
-     - name: deploy
-       uses: azure/arm-deploy@v1
+     -  name: deploy Bicep 
+        uses: azure/arm-deploy@v1
         with:
-         subscriptionID: ${{ env.subscriptionID }}
-         resourceGroupName: ${{ env.resourceGroupName }}
-         template: ./bicep/wk-test-strg01/main.bicep
-         parameters: 
-         failOnStdErr: false
+          subscriptionID: ${{ env.subscriptionID }}
+          resourceGroupName: ${{ env.resourceGroupName }}
+          template: ./bicep/wk-test-strg01/main.bicep
+          parameters: 
+          failOnStdErr: false
 # ------------NEW JOB------------------------------------------------------------------------------------
 
   ArmDeployProduction:
