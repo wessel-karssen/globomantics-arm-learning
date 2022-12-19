@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "west europe"
+        },
+        "networkInterfaceName": {
+            "value": "wk-test-ngnix-proxy-1"
+        },
+        "networkSecurityGroupName": {
+            "value": "wk-test-ngnix-proxy-1-NSG"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "SSH",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "22"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "srv-snet"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet"
+        },
+        "publicIpAddressName": {
+            "value": "wk-test-ngnix-proxy-1-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Detach"
+        },
+        "virtualMachineName": {
+            "value": "wk-test-ngnix-proxy-1"
+        },
+        "virtualMachineComputerName": {
+            "value": "wk-test-ngnix-proxy-1"
+        },
+        "virtualMachineRG": {
+            "value": "rg-stg-githubactions"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B1s"
+        },
+        "nicDeleteOption": {
+            "value": "Detach"
+        },
+        "adminUsername": {
+            "value": "wktest"
+        },
+        "adminPassword": {
+            "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+        }
+       
+    }
+}
