@@ -74,7 +74,7 @@
             "name": "ubuntuVM1-NetworkInterface",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-11-01",
-            "location": "[parameters('location')]]",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', 'ubuntuVM1-PublicIP')]",
                 "[resourceId('Microsoft.Network/virtualNetworks', 'wessel-test-vnet')]"
