@@ -61,7 +61,7 @@ jobs:
           subscriptionID: ${{ env.subscriptionID }}
           template: ./arm-templates/vnet/vnet.json
           parameters: ./arm-templates/vnet/vnet.parameters.json
-            location=${{ env.location }}
+            location="${{ env.location }}""
           deploymentMode: incremental
 
 # ------------NEW JOB------------------------------------------------------------------------------------
