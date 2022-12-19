@@ -59,7 +59,7 @@ jobs:
           scope: resourcegroup
           resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
-          template: ./bicep/wk-test-strg-01/main.bicep
+          template: ./bicep/wk-test-strg-01/strg-01.bicep
           parameters: 
             location="${{ env.location }}"
           failOnStdErr: false
