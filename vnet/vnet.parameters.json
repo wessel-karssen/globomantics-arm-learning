@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "wessel-test-network"
+        },
+        "displayName": {
+            "value": "Wessel playground" 
+        },
+        "subnet-1": {
+            "value": "mgnt-subnet" 
+        },
+        "subnet-2": {
+            "value": "srv-subnet" 
+        },
+        "location": {
+            "value": "North Europe" 
+        }
+    }
+}

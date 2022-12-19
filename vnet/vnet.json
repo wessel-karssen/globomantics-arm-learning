@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the name of the vnet"
+            }
+        },
+        "displayName": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the Displayname of the vnet"
+            }
+        },
+        "subnet-1": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the subnet-1 name"
+            }
+        },
+        "subnet-2": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the subnet-2 name"
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the location name"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "location": "[parameters('location')]",
+            "tags": {
+                "displayName": "[parameters('displayName')]"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.57.0.0/23"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnet-1')]",
+                        "properties": {
+                            "addressPrefix": "10.57.0.0/24"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet-2')]",
+                        "properties": {
+                            "addressPrefix": "10.0.1.0/24"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}

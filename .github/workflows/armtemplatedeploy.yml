@@ -52,29 +52,16 @@ jobs:
           parameters:
             resourceGroupName=${{ env.resourceGroupName }}
           deploymentName: ${{ env.resourceGroupName }}
-
-      - name: Deploy Storage Account
-        uses: Azure/arm-deploy@v1
-        id: storageAccountDeploy
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resourceGroupName }}
-          subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/storageaccount.json
-          parameters: 
-            ./arm-templates/storageaccount.parameters.json
-          deploymentMode: incremental
-
-      - name: Deploy Virutal machine
+      
+      - name: Deploy Virtual Network
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resourceGroupName }}
           subscriptionID: ${{ env.subscriptionID }}
-          template: ./arm-templates/virtualmachine.json
-          parameters: 
-            adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
-            location="${{ env.location }}"
+          template: ./arm-templates/vnet/vnet.json
+          parameters: ./arm-templates/vnet/vnet.parameters.json
+            location=${{ env.location }}
           deploymentMode: incremental
 
 # ------------NEW JOB------------------------------------------------------------------------------------
