@@ -93,10 +93,10 @@
                                 "properties": {
                                     "deleteOption": "[parameters('pipDeleteOption')]"
                                 }
-                            },
-                               "dnsSettings": {
-                                    "dnsServers": "[parameters('dns')]"
-                        }
+
+                            }
+                           
+                            }
                     }
                 ],
                 "networkSecurityGroup": {
