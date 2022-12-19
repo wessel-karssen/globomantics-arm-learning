@@ -58,9 +58,6 @@
         },
         "adminPassword": {
             "type": "secureString"
-        },
-        "dns": {
-            "type": "string"
         }
     },
     "variables": {
