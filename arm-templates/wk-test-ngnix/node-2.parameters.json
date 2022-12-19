@@ -6,10 +6,10 @@
             "value": "west europe"
         },
         "networkInterfaceName": {
-            "value": "wk-test-ngnix-node-1-Nic01"
+            "value": "wk-test-ngnix-node-2-Nic01"
         },
         "networkSecurityGroupName": {
-            "value": "wk-test-ngnix-node-1-NSG"
+            "value": "wk-test-ngnix-node-2-NSG"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -35,7 +35,7 @@
             "value": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet"
         },
         "publicIpAddressName": {
-            "value": "wk-test-ngnix-node-1-ip"
+            "value": "wk-test-ngnix-node-2-ip"
         },
         "publicIpAddressType": {
             "value": "Static"
@@ -47,10 +47,10 @@
             "value": "Detach"
         },
         "virtualMachineName": {
-            "value": "wk-test-ngnix-node-1"
+            "value": "wk-test-ngnix-node-2"
         },
         "virtualMachineComputerName": {
-            "value": "wk-test-ngnix-node-1"
+            "value": "wk-test-ngnix-node-2"
         },
         "virtualMachineRG": {
             "value": "rg-stg-githubactions"

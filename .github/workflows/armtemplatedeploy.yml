@@ -65,7 +65,7 @@ jobs:
             location="${{ env.location }}"
           deploymentMode: Complete
 
-      - name: Deploy Virtual Machine
+      - name: Deploy Virtual Machine ngnix node-1
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
@@ -74,6 +74,19 @@ jobs:
           template: ./arm-templates/wk-test-ngnix/node-1.json
           parameters: 
             ./arm-templates/wk-test-ngnix/node-1.parameters.json
+            location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Complete
+      
+      - name: Deploy Virtual Machine ngnix node-2
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-ngnix/node-2.json
+          parameters: 
+            ./arm-templates/wk-test-ngnix/node-2.parameters.json
             location="${{ env.location }}"
             adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
           deploymentMode: Complete
