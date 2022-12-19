@@ -3,16 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "wessel-test-network"
+            "value": "wessel-test-vnet"
         },
         "displayName": {
             "value": "Wessel playground" 
         },
         "subnet-1": {
-            "value": "mgnt-subnet" 
+            "value": "mgnt-snet" 
         },
         "subnet-2": {
-            "value": "srv-subnet" 
+            "value": "srv-snet" 
         },
         "location": {
             "value": "North Europe" 
