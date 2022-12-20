@@ -6,7 +6,7 @@
             "value": "west europe"
         },
         "networkInterfaceName": {
-            "value": "wk-test-ngnix-proxy-1"
+            "value": "wk-test-ngnix-proxy-Nic01"
         },
         "networkSecurityGroupName": {
             "value": "wk-test-ngnix-proxy-1-NSG"

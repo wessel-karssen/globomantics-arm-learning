@@ -3,39 +3,39 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "value": "west europe"
+            "value": "westeurope"
         },
         "networkInterfaceName": {
-            "value": "wk-test-ngnix-node-Nic01"
+            "value": "wk-test-mgnt-ws01349"
         },
         "networkSecurityGroupName": {
-            "value": "wk-test-ngnix-node-1-NSG"
+            "value": "wk-test-mgnt-ws01-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
                 {
-                    "name": "SSH",
+                    "name": "RDP",
                     "properties": {
                         "priority": 300,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Inbound",
-                        "sourceAddressPrefix": "*",
+                        "sourceAddressPrefix": "213.154.234.62",
                         "sourcePortRange": "*",
                         "destinationAddressPrefix": "*",
-                        "destinationPortRange": "22"
+                        "destinationPortRange": "3389"
                     }
                 }
             ]
         },
         "subnetName": {
-            "value": "srv-snet"
+            "value": "mgnt-snet"
         },
         "virtualNetworkId": {
             "value": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet"
         },
         "publicIpAddressName": {
-            "value": "wk-test-ngnix-node-1-ip"
+            "value": "wk-test-mgnt-ws01-ip"
         },
         "publicIpAddressType": {
             "value": "Static"
@@ -47,10 +47,10 @@
             "value": "Detach"
         },
         "virtualMachineName": {
-            "value": "wk-test-ngnix-node-1"
+            "value": "wk-test-mgnt-ws01"
         },
         "virtualMachineComputerName": {
-            "value": "wk-test-ngnix-node-1"
+            "value": "wk-test-mgnt-ws"
         },
         "virtualMachineRG": {
             "value": "rg-stg-githubactions"
@@ -71,8 +71,13 @@
             "value": "wktest"
         },
         "adminPassword": {
-            "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
         }
-       
     }
 }
