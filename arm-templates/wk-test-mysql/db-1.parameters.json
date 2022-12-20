@@ -181,7 +181,7 @@
             "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
         },
         "version": {
-            "value": "8.0"
+            "value": "8.0.21"
         }
     }
 }
