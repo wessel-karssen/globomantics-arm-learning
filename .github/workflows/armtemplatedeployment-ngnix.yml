@@ -25,7 +25,7 @@ env:
 jobs:
   # This workflow contains a single job called "build"
   ArmDeploy-1:
-    name: Deploy RG and Vnet
+    name: Deploy Virtual Machine ngnix node-1
 
 
     # The type of runner that the job will run on
