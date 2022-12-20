@@ -25,6 +25,119 @@
                 "rules": []
             }
         },
+        "vnetData": {
+            "value": {
+                "isLoading": false,
+                "virtualNetworkName": "wessel-test-vnet",
+                "virtualNetworkId": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet",
+                "subnetList": [
+                    {
+                        "subnetName": "mgnt-snet",
+                        "subnetNeedsUpdate": true,
+                        "subnetProperties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.119.0.0/24",
+                            "delegations": [
+                                {
+                                    "name": "dlg-Microsoft.DBforMySQL-flexibleServers",
+                                    "properties": {
+                                        "serviceName": "Microsoft.DBforMySQL/flexibleServers"
+                                    }
+                                }
+                            ],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    },
+                    {
+                        "subnetName": "mysql-snet",
+                        "subnetNeedsUpdate": true,
+                        "subnetProperties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.119.2.0/24",
+                            "delegations": [
+                                {
+                                    "name": "dlg-Microsoft.DBforMySQL-flexibleServers",
+                                    "properties": {
+                                        "serviceName": "Microsoft.DBforMySQL/flexibleServers"
+                                    }
+                                }
+                            ],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    },
+                    {
+                        "subnetName": "srv-snet",
+                        "subnetNeedsUpdate": true,
+                        "subnetProperties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.119.1.0/24",
+                            "ipConfigurations": [
+                                {
+                                    "id": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/networkInterfaces/wk-test-ngnix-node-1845/ipConfigurations/ipconfig1"
+                                },
+                                {
+                                    "id": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/networkInterfaces/wk-test-ngnix-node-2-Nic01/ipConfigurations/ipconfig1"
+                                },
+                                {
+                                    "id": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/networkInterfaces/wk-test-ngnix-proxy-1/ipConfigurations/ipconfig1"
+                                }
+                            ],
+                            "delegations": [
+                                {
+                                    "name": "dlg-Microsoft.DBforMySQL-flexibleServers",
+                                    "properties": {
+                                        "serviceName": "Microsoft.DBforMySQL/flexibleServers"
+                                    }
+                                }
+                            ],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    }
+                ],
+                "subnetName": "mysql-snet",
+                "virtualNetworkSubscriptionName": "Wessel Playground",
+                "virtualNetworkAddressPrefix": "10.119.0.0/22",
+                "virtualNetworkResourceGroupName": "rg-stg-githubactions",
+                "location": "westeurope",
+                "subscriptionId": "4ce69478-57ab-4f86-9a6d-4865ded3c14d",
+                "subnetProperties": {
+                    "provisioningState": "Succeeded",
+                    "addressPrefix": "10.119.2.0/24",
+                    "delegations": [
+                        {
+                            "name": "dlg-Microsoft.DBforMySQL-flexibleServers",
+                            "properties": {
+                                "serviceName": "Microsoft.DBforMySQL/flexibleServers"
+                            }
+                        }
+                    ],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                "subnetNeedsUpdate": true,
+                "isNewVnet": false,
+                "delegatedSubnetArguments": {
+                    "SubnetArmResourceId": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet/subnets/mysql-snet"
+                },
+                "usePrivateDnsZone": true,
+                "isNewPrivateDnsZone": true,
+                "privateDnsResourceGroup": "rg-stg-githubactions",
+                "privateDnsSubscriptionId": "4ce69478-57ab-4f86-9a6d-4865ded3c14d",
+                "privateDnsZoneName": "wk-test-mysql-db01.private.mysql.database.azure.com",
+                "privateDnsZoneSubscription": "Wessel Playground",
+                "privateDnsZoneArguments": {
+                    "PrivateDnsZoneArmResourceId": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/privateDnsZones/wk-test-mysql-db01.private.mysql.database.azure.com"
+                },
+                "linkVirtualNetwork": true,
+                "Network": {
+                    "DelegatedSubnetResourceId": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet/subnets/mysql-snet",
+                    "PrivateDnsZoneResourceId": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/privateDnsZones/wk-test-mysql-db01.private.mysql.database.azure.com"
+                }
+            }
+        },
         "backupRetentionDays": {
             "value": 7
         },
@@ -49,6 +162,15 @@
         "autoIoScaling": {
             "value": "Disabled"
         },
+        "virtualNetworkDeploymentName": {
+            "value": "virtualNetwork_20221220T091050191Z"
+        },
+        "virtualNetworkLinkDeploymentName": {
+            "value": "virtualNetworkLink_20221220T091050191Z"
+        },
+        "privateDnsZoneDeploymentName": {
+            "value": "privateDnsZone_20221220T091050191Z"
+        },
         "tags": {
             "value": {}
         },
@@ -56,10 +178,10 @@
             "value": "wktest"
         },
         "administratorLoginPassword": {
-            "value": null
+            "value": "${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
         },
         "version": {
-            "value": "5.7"
+            "value": "8.0"
         }
     }
 }
