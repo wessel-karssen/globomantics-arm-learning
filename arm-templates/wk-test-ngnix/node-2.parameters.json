@@ -34,18 +34,6 @@
         "virtualNetworkId": {
             "value": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet"
         },
-        "publicIpAddressName": {
-            "value": "wk-test-ngnix-node-2-ip"
-        },
-        "publicIpAddressType": {
-            "value": "Static"
-        },
-        "publicIpAddressSku": {
-            "value": "Standard"
-        },
-        "pipDeleteOption": {
-            "value": "Detach"
-        },
         "virtualMachineName": {
             "value": "wk-test-ngnix-node-2"
         },

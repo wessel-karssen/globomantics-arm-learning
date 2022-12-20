@@ -10,7 +10,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   
   workflow_run:
-    workflows: ['armTemplateDeployment']
+    workflows: ['armTemplateDeployment-dev']
     types:
       - completed
     branches:
