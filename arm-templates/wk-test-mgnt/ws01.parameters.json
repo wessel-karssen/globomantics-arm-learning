@@ -1,194 +1,83 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "value": "westeurope"
         },
         "networkInterfaceName": {
-            "type": "string"
+            "value": "wk-test-mgnt-ws01349"
         },
         "networkSecurityGroupName": {
-            "type": "string"
+            "value": "wk-test-mgnt-ws01-nsg"
         },
         "networkSecurityGroupRules": {
-            "type": "array"
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "213.154.234.62",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
         },
         "subnetName": {
-            "type": "string"
+            "value": "mgnt-snet"
         },
         "virtualNetworkId": {
-            "type": "string"
+            "value": "/subscriptions/4ce69478-57ab-4f86-9a6d-4865ded3c14d/resourceGroups/rg-stg-githubactions/providers/Microsoft.Network/virtualNetworks/wessel-test-vnet"
         },
         "publicIpAddressName": {
-            "type": "string"
+            "value": "wk-test-mgnt-ws01-ip"
         },
         "publicIpAddressType": {
-            "type": "string"
+            "value": "Static"
         },
         "publicIpAddressSku": {
-            "type": "string"
+            "value": "Standard"
         },
         "pipDeleteOption": {
-            "type": "string"
+            "value": "Detach"
         },
         "virtualMachineName": {
-            "type": "string"
+            "value": "wk-test-mgnt-ws01"
         },
         "virtualMachineComputerName": {
-            "type": "string"
+            "value": "wk-test-mgnt-ws"
         },
         "virtualMachineRG": {
-            "type": "string"
+            "value": "rg-stg-githubactions"
         },
         "osDiskType": {
-            "type": "string"
+            "value": "StandardSSD_LRS"
         },
         "osDiskDeleteOption": {
-            "type": "string"
+            "value": "Delete"
         },
         "virtualMachineSize": {
-            "type": "string"
+            "value": "Standard_B1s"
         },
         "nicDeleteOption": {
-            "type": "string"
+            "value": "Detach"
         },
         "adminUsername": {
-            "type": "string"
+            "value": "wktest"
         },
         "adminPassword": {
-            "type": "secureString"
+            "value": null
         },
         "patchMode": {
-            "type": "string"
+            "value": "AutomaticByOS"
         },
         "enableHotpatching": {
-            "type": "bool"
-        }
-    },
-    "variables": {
-        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
-        "vnetId": "[parameters('virtualNetworkId')]",
-        "vnetName": "[last(split(variables('vnetId'), '/'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
-    },
-    "resources": [
-        {
-            "name": "[parameters('networkInterfaceName')]",
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2021-08-01",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
-                "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]"
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "subnet": {
-                                "id": "[variables('subnetRef')]"
-                            },
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIpAddress": {
-                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]",
-                                "properties": {
-                                    "deleteOption": "[parameters('pipDeleteOption')]"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "networkSecurityGroup": {
-                    "id": "[variables('nsgId')]"
-                }
-            }
-        },
-        {
-            "name": "[parameters('networkSecurityGroupName')]",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2019-02-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "securityRules": "[parameters('networkSecurityGroupRules')]"
-            }
-        },
-        {
-            "name": "[parameters('publicIpAddressName')]",
-            "type": "Microsoft.Network/publicIpAddresses",
-            "apiVersion": "2020-08-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
-            },
-            "sku": {
-                "name": "[parameters('publicIpAddressSku')]"
-            }
-        },
-        {
-            "name": "[parameters('virtualMachineName')]",
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2022-03-01",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
-            ],
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "[parameters('virtualMachineSize')]"
-                },
-                "storageProfile": {
-                    "osDisk": {
-                        "createOption": "fromImage",
-                        "managedDisk": {
-                            "storageAccountType": "[parameters('osDiskType')]"
-                        },
-                        "deleteOption": "[parameters('osDiskDeleteOption')]"
-                    },
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsDesktop",
-                        "offer": "Windows-10",
-                        "sku": "win10-21h2-pro-g2",
-                        "version": "latest"
-                    }
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]",
-                            "properties": {
-                                "deleteOption": "[parameters('nicDeleteOption')]"
-                            }
-                        }
-                    ]
-                },
-                "osProfile": {
-                    "computerName": "[parameters('virtualMachineComputerName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]",
-                    "windowsConfiguration": {
-                        "enableAutomaticUpdates": true,
-                        "provisionVmAgent": true,
-                        "patchSettings": {
-                            "enableHotpatching": "[parameters('enableHotpatching')]",
-                            "patchMode": "[parameters('patchMode')]"
-                        }
-                    }
-                },
-                "licenseType": "Windows_Client",
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": true
-                    }
-                }
-            }
-        }
-    ],
-    "outputs": {
-        "adminUsername": {
-            "type": "string",
-            "value": "[parameters('adminUsername')]"
+            "value": false
         }
     }
 }
