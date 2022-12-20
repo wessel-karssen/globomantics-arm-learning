@@ -1,0 +1,142 @@
+# This is a basic workflow to help you get started with Actions
+
+name: armTemplateDeployment-ngnix
+
+# Controls when the workflow will run
+on:
+  #push:
+  #  branches:
+  #    - "main"
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  
+  workflow_run:
+    workflows: ['armTemplateDeployment-vnet']
+    types:
+      - completed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  subscriptionID: 4ce69478-57ab-4f86-9a6d-4865ded3c14d
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  ArmDeploy-1:
+    name: Deploy RG and Vnet
+
+
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      resourceGroupName: "rg-stg-githubactions"
+      location: West Europe
+    environment:
+      name: dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Login to Azure
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Resource Group ${{ env.resourceGroupName }}
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionID: ${{ env.subscriptionID }}
+          region: "${{ env.location }}"
+          template: ./arm-templates/resourcegroup.json
+          parameters:
+            resourceGroupName=${{ env.resourceGroupName }}
+          deploymentName: ${{ env.resourceGroupName }}
+          
+      - name: Deploy Virtual Network
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/vnet/vnet.json
+          parameters: 
+            ./arm-templates/vnet/vnet.parameters.json
+            location="${{ env.location }}"
+          deploymentMode: Complete
+
+  ArmDeploy-2:
+    name: Deploy Virtual Machines
+
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      resourceGroupName: "rg-stg-githubactions"
+      location: West Europe
+    environment:
+      name: dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Login to Azure
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Virtual Machine ngnix node-1
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-ngnix/node-1.json
+          parameters: 
+            ./arm-templates/wk-test-ngnix/node-1.parameters.json
+            location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Incremental
+      
+      - name: Deploy Virtual Machine ngnix node-2
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-ngnix/node-2.json
+          parameters: 
+            ./arm-templates/wk-test-ngnix/node-2.parameters.json
+            location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Incremental
+
+      - name: Deploy Virtual Machine ngnix proxy-1
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-ngnix/proxy-1.json
+          parameters: 
+            ./arm-templates/wk-test-ngnix/proxy-1.parameters.json
+            location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Incremental
+
+      - name: Deploy MySQL db-1
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-mysql/db-1.json
+          parameters: 
+            ./arm-templates/wk-test-mysql/db-1.parameters.json
+            location="${{ env.location }}"
+            administratorLoginPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Incremental
