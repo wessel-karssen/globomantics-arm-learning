@@ -12,21 +12,7 @@
             "value": "wk-test-ngnix-node-2-NSG"
         },
         "networkSecurityGroupRules": {
-            "value": [
-                {
-                    "name": "SSH",
-                    "properties": {
-                        "priority": 300,
-                        "protocol": "TCP",
-                        "access": "Allow",
-                        "direction": "Inbound",
-                        "sourceAddressPrefix": "*",
-                        "sourcePortRange": "*",
-                        "destinationAddressPrefix": "*",
-                        "destinationPortRange": "22"
-                    }
-                }
-            ]
+            "value": []
         },
         "subnetName": {
             "value": "srv-snet"
