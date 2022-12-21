@@ -14,7 +14,7 @@
         "networkSecurityGroupRules": {
             "value": [
                 {
-                    "name": "SSH",
+                    "name": "HTTP",
                     "properties": {
                         "priority": 300,
                         "protocol": "TCP",
@@ -23,7 +23,7 @@
                         "sourceAddressPrefix": "*",
                         "sourcePortRange": "*",
                         "destinationAddressPrefix": "*",
-                        "destinationPortRange": "22"
+                        "destinationPortRange": "80"
                     }
                 }
             ]

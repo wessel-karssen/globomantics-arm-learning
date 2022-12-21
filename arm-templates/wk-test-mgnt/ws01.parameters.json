@@ -62,7 +62,7 @@
             "value": "Delete"
         },
         "virtualMachineSize": {
-            "value": "Standard_B1s"
+            "value": "Standard_B4ms"
         },
         "nicDeleteOption": {
             "value": "Detach"
