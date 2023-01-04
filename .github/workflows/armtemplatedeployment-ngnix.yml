@@ -59,6 +59,19 @@ jobs:
             adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
           deploymentMode: Incremental
 
+      - name: Deploy Virtual Machine FileShare fs-1
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resourceGroupName }}
+          subscriptionID: ${{ env.subscriptionID }}
+          template: ./arm-templates/wk-test-fs/fs-1.json
+          parameters: 
+            ./arm-templates/wk-test-fs/fs-1.parameters.json
+            location="${{ env.location }}"
+            adminPassword="${{ secrets.UBUNTU_ADMIN_PASSWORD }}"
+          deploymentMode: Incremental
+
   ArmDeploy-2:
     name: Deploy Virtual Machines
 
